@@ -80,3 +80,9 @@ Bob registered in contest 207 and the percentage is ((1/3) * 100) = 33.33%
 SELECT * FROM Users_36;
 SELECT * FROM Register_36;
 
+SELECT r.contest_id, ROUND(COUNT(*)/(SELECT COUNT(DISTINCT(user_id)) FROM Users_36)*100,2) AS percentage
+FROM Users_36 AS u
+JOIN Register_36 AS r
+ON u.user_id = r.user_id
+GROUP BY r.contest_id
+ORDER BY percentage DESC, r.contest_id;
